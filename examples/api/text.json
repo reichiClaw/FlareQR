@@ -1,0 +1,12 @@
+{
+  "content": {
+    "type": "text",
+    "value": {
+      "text": "Hello from FlareQR Studio ✨"
+    }
+  },
+  "output": {
+    "format": "svg",
+    "filename": "hello"
+  }
+}
