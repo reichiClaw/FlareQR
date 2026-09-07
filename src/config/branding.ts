@@ -15,7 +15,7 @@ export const branding = {
   description:
     'Self-hosted, privacy-first QR code studio with rich styling, logo support, batch generation and an HTTP API – running on Cloudflare Workers.',
   /** Public repository URL (used for "Deploy to Cloudflare" and footer links). */
-  repositoryUrl: 'https://github.com/reichiClaw/QRflare',
+  repositoryUrl: 'https://github.com/reichiClaw/flareqr',
   /** Accent colours (hex). Also mirrored in src/app/styles/theme.css. */
   colors: {
     primary: '#2563EB',
