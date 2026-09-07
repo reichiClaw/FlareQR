@@ -5,8 +5,8 @@ Thanks for your interest in FlareQR Studio. This document explains how to set up
 ## Development setup
 
 ```bash
-git clone https://github.com/reichiClaw/QRflare.git
-cd QRflare
+git clone https://github.com/reichiClaw/flareqr.git
+cd flareqr
 npm ci
 npx playwright install chromium   # only for browser tests
 npm run dev

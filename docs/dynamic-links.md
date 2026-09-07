@@ -57,7 +57,7 @@ On the Links page click **Use in studio**: the short URL is loaded into the URL 
 ## API
 
 ```bash
-BASE=https://flareqr-studio.YOUR-SUBDOMAIN.workers.dev
+BASE=https://flareqr.YOUR-SUBDOMAIN.workers.dev
 SESSION=$(curl -s -X POST $BASE/api/admin/login -H 'Content-Type: application/json' -d '{"password":"…"}' | jq -r .token)
 
 curl -s $BASE/api/v1/links -H "Authorization: Bearer $SESSION"

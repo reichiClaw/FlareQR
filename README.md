@@ -3,7 +3,7 @@
 **A self-hosted, privacy-first QR code studio that runs entirely on Cloudflare Workers.**
 Design richly styled, standards-compliant QR codes for 20 content types, export them as SVG, PNG or JPG, generate hundreds at once from a CSV, create editable **dynamic links** (built in or through your own [Sink](https://github.com/miantiao-me/sink) instance) and automate everything through a documented HTTP API – all from a single Worker deployment configured through a password-protected admin page.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/reichiClaw/QRflare)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/reichiClaw/flareqr)
 
 > **Setup in three steps:** click the button → open your new site → open **Admin** and choose a password. That is all. No account IDs, API tokens, secrets or manual database creation – the one D1 database the app uses is provisioned automatically and every other option lives in the Admin area.
 
@@ -97,13 +97,13 @@ Design richly styled, standards-compliant QR codes for 20 content types, export 
 ## Quick start
 
 1. Click **Deploy to Cloudflare** above and follow the prompts (Cloudflare forks the repository into your GitHub/GitLab account and builds it with Workers Builds).
-2. Open `https://flareqr-studio.<your-subdomain>.workers.dev`.
+2. Open `https://flareqr.<your-subdomain>.workers.dev`.
 3. Click **Admin** in the header, choose an admin password, and configure whatever you need – or simply start generating codes; the studio works without touching the admin area.
 
 Prefer the command line?
 
 ```bash
-git clone https://github.com/reichiClaw/QRflare.git && cd QRflare
+git clone https://github.com/reichiClaw/flareqr.git && cd flareqr
 npm ci
 npx wrangler login
 npm run deploy          # builds, provisions the D1 database, deploys
@@ -224,7 +224,7 @@ Before the first `npm run test:browser` install a browser: `npx playwright insta
 
 ### One click
 
-Click **Deploy to Cloudflare**. Cloudflare forks the repository, creates a Worker named `flareqr-studio` connected to it (Workers Builds), provisions the D1 database declared in `wrangler.jsonc` and deploys on every push.
+Click **Deploy to Cloudflare**. Cloudflare forks the repository, creates a Worker named `flareqr` connected to it (Workers Builds), provisions the D1 database declared in `wrangler.jsonc` and deploys on every push.
 
 Build command: `npm run build` · Deploy command: `npx wrangler deploy` · Root directory: `/`
 
@@ -248,7 +248,7 @@ npm run deploy         # = npm run build && wrangler deploy
 
 ## Custom domain
 
-Optional. In the Cloudflare dashboard open **Workers & Pages → flareqr-studio → Settings → Domains & Routes → Add → Custom domain**, or add to `wrangler.jsonc`:
+Optional. In the Cloudflare dashboard open **Workers & Pages → flareqr → Settings → Domains & Routes → Add → Custom domain**, or add to `wrangler.jsonc`:
 
 ```jsonc
 "routes": [{ "pattern": "qr.example.com", "custom_domain": true }]
@@ -298,7 +298,7 @@ Request body for `validate`/`generate` (all fields except `content` optional):
 ### curl examples
 
 ```bash
-BASE=https://flareqr-studio.YOUR-SUBDOMAIN.workers.dev
+BASE=https://flareqr.YOUR-SUBDOMAIN.workers.dev
 
 # Health
 curl -s $BASE/api/health | jq
