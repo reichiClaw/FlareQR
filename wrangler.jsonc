@@ -28,7 +28,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "flareqr","database_id": "01532d10-f6e4-4cf4-b882-b72b32852174",
+      "database_name": "flareqr",
+      "database_id": "01532d10-f6e4-4cf4-b882-b72b32852174",
     },
   ],
   "observability": {
