@@ -23,7 +23,7 @@ export function Footer() {
             Source code
           </a>
           <span>
-            {branding.name} v{__APP_VERSION__}
+            {branding.name} by reichi v{__APP_VERSION__}
           </span>
         </p>
       </div>
