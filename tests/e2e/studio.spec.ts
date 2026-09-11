@@ -178,12 +178,13 @@ test.describe('FlareQR Studio', () => {
     expect(errors.map((e) => e.text())).toEqual([]);
   });
 
-  test('exposes search-engine metadata and a visible page heading', async ({ page }) => {
+  test('exposes search-engine metadata and a footer tooltip with the marketing copy', async ({ page }) => {
     await openStudio(page);
     await expect(page).toHaveTitle(/FlareQR Studio – Free, private QR code generator/);
+    // The h1 exists for crawlers and screen readers but takes no visual space.
     await expect(
       page.getByRole('heading', { level: 1, name: /free, private qr code generator/i }),
-    ).toBeVisible();
+    ).toHaveCount(1);
     const head = page.locator('head');
     await expect(head.locator('meta[name="description"]')).toHaveAttribute(
       'content',
@@ -199,12 +200,21 @@ test.describe('FlareQR Studio', () => {
     expect(jsonLd.keywords).toMatch(/privacy/i);
     expect(jsonLd.featureList?.length).toBeGreaterThan(5);
 
-    // Marketing copy lives below the editor, not in the header.
-    const about = page.getByRole('region', { name: /about flareqr studio/i });
-    await expect(about.getByRole('heading', { name: /privacy first/i })).toBeVisible();
-    await expect(about.getByRole('heading', { name: /complete qr toolkit/i })).toBeVisible();
-    await expect(about.getByRole('listitem')).toHaveCount(jsonLd.featureList?.length ?? 0);
-    await expect(page.locator('header').getByText(/privacy first/i)).toHaveCount(0);
+    // Marketing copy is in the DOM but only shown as a tooltip on the footer trigger.
+    const tooltip = page.getByRole('tooltip', { includeHidden: true });
+    await expect(tooltip).toBeAttached();
+    await expect(tooltip).toBeHidden();
+    await expect(tooltip.getByRole('listitem', { includeHidden: true })).toHaveCount(
+      jsonLd.featureList?.length ?? 0,
+    );
+    const trigger = page.getByTestId('about-trigger');
+    await trigger.scrollIntoViewIfNeeded();
+    await trigger.focus();
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip.getByRole('heading', { name: /privacy first/i })).toBeVisible();
+    await expect(tooltip.getByRole('heading', { name: /complete qr toolkit/i })).toBeVisible();
+    await page.keyboard.press('Shift+Tab');
+    await expect(tooltip).toBeHidden();
   });
 
   test('serves robots.txt, the social image and a real 404 page with a link to the studio', async ({

@@ -421,8 +421,8 @@ Tested with Chromium (desktop + mobile emulation) in CI. Uses standard APIs avai
 
 The studio is a single page, so search-engine optimisation is about describing it correctly rather than about content. The build (`scripts/seo.ts`, `seo` plugin in `vite.config.ts`) generates everything from `branding.seo`:
 
-- `<title>`, meta description, Open Graph and Twitter Card tags, and a JSON-LD `WebApplication` block (with `keywords` and a `featureList`) in `index.html`; a visible `<h1>` heads the Studio view.
-- A compact "About" strip below the editor with the two marketing messages – privacy first and the breadth of tools as feature chips (`branding.seo.about` / `branding.seo.features`) – kept out of the header and deliberately small so the editor keeps the space.
+- `<title>`, meta description, Open Graph and Twitter Card tags, and a JSON-LD `WebApplication` block (with `keywords` and a `featureList`) in `index.html`; a visually hidden `<h1>` heads the Studio view.
+- The two marketing messages – privacy first and the breadth of tools as feature chips (`branding.seo.about` / `branding.seo.features`) – live in a tooltip on the footer line "Generated locally in your browser. Nothing is uploaded." (hover or focus). They are always in the DOM for crawlers but take no space in the layout.
 - `public/og-image.png` (1200×630) as the social preview image, rendered by `npm run icons`.
 - `robots.txt` that allows the studio but disallows `/api/` and `/r/`; the Worker additionally sends `X-Robots-Tag: noindex, nofollow` on those routes.
 - A static `404.html` with a link back to the studio; unknown paths return a real HTTP 404 instead of a copy of the app, so crawlers never index stray URLs.

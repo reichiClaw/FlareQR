@@ -12,7 +12,6 @@ import { useServer } from './store/server';
 import { ContentPanel } from './components/content/ContentPanel';
 import { DesignPanel } from './components/design/DesignPanel';
 import { ExportPanel } from './components/export/ExportPanel';
-import { AboutSection } from './components/layout/AboutSection';
 import { Footer } from './components/layout/Footer';
 import { Header, type AppView } from './components/layout/Header';
 import { PreviewPanel } from './components/preview/PreviewPanel';
@@ -77,14 +76,11 @@ export function App() {
       <main id="main" className="mx-auto w-full max-w-[1600px] flex-1 px-3 py-4 sm:px-5" tabIndex={-1}>
         {view === 'studio' ? (
           <>
-            <div className="mb-2 flex items-baseline gap-x-2 px-1">
-              <h1 className="shrink-0 text-sm font-semibold tracking-tight">{branding.seo.headline}</h1>
-              <p className="hidden min-w-0 truncate text-xs text-muted sm:block">{branding.seo.intro}</p>
-            </div>
+            <h1 className="sr-only">{branding.seo.headline}</h1>
             {isDesktop ? (
               <div className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)_380px] xl:grid-cols-[400px_minmax(0,1fr)_420px]">
                 <aside
-                  className="panel max-h-[calc(100vh-8.75rem)] overflow-y-auto p-4 scroll-thin"
+                  className="panel max-h-[calc(100vh-7rem)] overflow-y-auto p-4 scroll-thin"
                   aria-label="Content"
                 >
                   <ContentPanel result={generation.result} />
@@ -102,7 +98,7 @@ export function App() {
                   </div>
                 </section>
                 <aside
-                  className="flex max-h-[calc(100vh-8.75rem)] flex-col gap-4 overflow-y-auto scroll-thin"
+                  className="flex max-h-[calc(100vh-7rem)] flex-col gap-4 overflow-y-auto scroll-thin"
                   aria-label="Design and export"
                 >
                   <div className="panel p-4">
@@ -114,7 +110,7 @@ export function App() {
                 </aside>
               </div>
             ) : (
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 pb-24">
                 {mobileTab !== 'preview' ? (
                   <div className="panel sticky top-16 z-20 flex items-center gap-3 p-3">
                     <PreviewPanel
@@ -179,7 +175,6 @@ export function App() {
                 </nav>
               </div>
             )}
-            <AboutSection className={cn('mt-4', !isDesktop && 'mb-24')} />
           </>
         ) : null}
 

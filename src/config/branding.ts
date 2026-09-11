@@ -50,14 +50,11 @@ export const branding = {
       'open source',
       'Cloudflare Workers',
     ],
-    /** Visible <h1> of the Studio view. */
+    /** Visually hidden <h1> of the Studio view (screen readers and crawlers only). */
     headline: 'Free, private QR code generator',
-    /** One-sentence intro shown next to the headline. */
-    intro:
-      'Design QR codes with logos and colours, check scan reliability and export SVG, PNG or JPG – generated locally in your browser.',
     /**
-     * Marketing copy shown below the editor on the Studio view and mirrored in
-     * the JSON-LD `featureList` so search engines see the same message.
+     * Marketing copy shown in the footer tooltip (hover "Generated locally in
+     * your browser…") and mirrored in the JSON-LD `featureList`.
      */
     about: {
       privacy: {
@@ -67,8 +64,8 @@ export const branding = {
       toolkit: { title: 'A complete QR toolkit' },
     },
     /**
-     * Tools and capabilities. `label` is shown as a compact chip on the Studio
-     * view (with `detail` as its tooltip); structured data lists both.
+     * Tools and capabilities. `label` is shown as a compact chip in the footer
+     * tooltip (with `detail` as its title); structured data lists both.
      */
     features: [
       {
