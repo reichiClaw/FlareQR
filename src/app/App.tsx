@@ -79,7 +79,7 @@ export function App() {
           <>
             <div className="mb-2 flex items-baseline gap-x-2 px-1">
               <h1 className="shrink-0 text-sm font-semibold tracking-tight">{branding.seo.headline}</h1>
-              <p className="min-w-0 truncate text-xs text-muted">{branding.seo.intro}</p>
+              <p className="hidden min-w-0 truncate text-xs text-muted sm:block">{branding.seo.intro}</p>
             </div>
             {isDesktop ? (
               <div className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)_380px] xl:grid-cols-[400px_minmax(0,1fr)_420px]">
