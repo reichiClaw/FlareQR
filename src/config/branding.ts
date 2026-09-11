@@ -36,12 +36,52 @@ export const branding = {
     titleTagline: 'Free, private QR code generator',
     /** Meta description / social preview text (aim for ≤ 160 characters). */
     description:
-      'Create styled QR codes with logos and export SVG, PNG or JPG – free, in your browser, nothing uploaded. Batch CSV generation, dynamic links and an HTTP API.',
+      'Privacy-first QR code generator – everything runs in your browser, nothing is uploaded. Logos and styling, SVG/PNG/JPG export, batch CSV, dynamic links and an HTTP API.',
+    /** Search keywords (JSON-LD `keywords`); pick the phrases people actually search for. */
+    keywords: [
+      'QR code generator',
+      'privacy-first QR code',
+      'QR code with logo',
+      'SVG QR code',
+      'batch QR codes from CSV',
+      'dynamic QR codes',
+      'QR code API',
+      'self-hosted QR code generator',
+      'open source',
+      'Cloudflare Workers',
+    ],
     /** Visible <h1> of the Studio view. */
     headline: 'Free, private QR code generator',
     /** One-sentence intro shown next to the headline. */
     intro:
       'Design QR codes with logos and colours, check scan reliability and export SVG, PNG or JPG – generated locally in your browser.',
+    /**
+     * Marketing copy shown below the editor on the Studio view and mirrored in
+     * the JSON-LD `featureList` so search engines see the same message.
+     */
+    about: {
+      privacy: {
+        title: 'Privacy first',
+        text: 'Every QR code is generated locally in your browser: the content you enter is never uploaded, logged or tracked. No accounts, no analytics, no third-party scripts. Self-host it on your own Cloudflare account and stay in full control of your data.',
+      },
+      toolkit: {
+        title: 'A complete QR toolkit',
+        text: 'Far more than a URL-to-QR converter – one open-source studio covers the whole workflow from design to automation.',
+      },
+    },
+    /** Tools and capabilities, listed on the Studio view and in structured data. */
+    features: [
+      '20 content types: URL, text, Wi-Fi, vCard, MeCard, email, phone, SMS, WhatsApp, events, location, SEPA, Bitcoin, Ethereum, 2FA and more',
+      'Module and finder styles, colours, gradients, frames and captions',
+      'Logo embedding that keeps codes scannable',
+      'Scan-reliability check with one-click safe defaults',
+      'SVG, PNG and JPG export, clipboard and data-URL copy',
+      'Batch generation from CSV with ZIP download',
+      'Editable dynamic links with scan statistics',
+      'Presets, undo/redo, local history and an offline-capable PWA',
+      'Documented HTTP API with OpenAPI 3.1 specification',
+      'Self-hosted on Cloudflare Workers, open source (MIT)',
+    ],
     /** 1200×630 social preview image served from the assets directory (see scripts/generate-icons.mjs). */
     imagePath: '/og-image.png',
     /** Twitter/X card type. */

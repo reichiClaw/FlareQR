@@ -12,6 +12,7 @@ import { useServer } from './store/server';
 import { ContentPanel } from './components/content/ContentPanel';
 import { DesignPanel } from './components/design/DesignPanel';
 import { ExportPanel } from './components/export/ExportPanel';
+import { AboutSection } from './components/layout/AboutSection';
 import { Footer } from './components/layout/Footer';
 import { Header, type AppView } from './components/layout/Header';
 import { PreviewPanel } from './components/preview/PreviewPanel';
@@ -113,7 +114,7 @@ export function App() {
                 </aside>
               </div>
             ) : (
-              <div className="flex flex-col gap-3 pb-24">
+              <div className="flex flex-col gap-3">
                 {mobileTab !== 'preview' ? (
                   <div className="panel sticky top-16 z-20 flex items-center gap-3 p-3">
                     <PreviewPanel
@@ -178,6 +179,7 @@ export function App() {
                 </nav>
               </div>
             )}
+            <AboutSection className={cn('mt-6', !isDesktop && 'pb-24')} />
           </>
         ) : null}
 

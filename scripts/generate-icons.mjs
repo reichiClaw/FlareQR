@@ -17,7 +17,7 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const OG = {
   name: 'FlareQR Studio',
   taglineLines: ['Free, private', 'QR code generator'],
-  description: 'Logos & styling · SVG, PNG, JPG · Batch CSV · Dynamic links · HTTP API',
+  description: 'Privacy-first · Logos & styling · SVG, PNG, JPG · Batch CSV · Dynamic links · API',
   footer: 'Runs in your browser – nothing is uploaded',
   colors: { primary: '#2563EB', accent: '#14B8A6', dark: '#0B1220', light: '#F8FAFC' },
 };
