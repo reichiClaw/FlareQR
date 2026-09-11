@@ -189,8 +189,19 @@ test.describe('FlareQR Studio', () => {
     await expect(head.locator('meta[property="og:title"]')).toHaveAttribute('content', /FlareQR Studio/);
     await expect(head.locator('meta[property="og:image"]')).toHaveAttribute('content', /og-image\.png$/);
     await expect(head.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
-    const jsonLd = await head.locator('script[type="application/ld+json"]').textContent();
-    expect(JSON.parse(jsonLd ?? '{}')).toMatchObject({ '@type': 'WebApplication', name: 'FlareQR Studio' });
+    const jsonLd = JSON.parse(
+      (await head.locator('script[type="application/ld+json"]').textContent()) ?? '{}',
+    ) as { featureList?: string[]; keywords?: string };
+    expect(jsonLd).toMatchObject({ '@type': 'WebApplication', name: 'FlareQR Studio' });
+    expect(jsonLd.keywords).toMatch(/privacy/i);
+    expect(jsonLd.featureList?.length).toBeGreaterThan(5);
+
+    // Marketing copy lives below the editor, not in the header.
+    const about = page.getByRole('region', { name: /about flareqr studio/i });
+    await expect(about.getByRole('heading', { name: /privacy first/i })).toBeVisible();
+    await expect(about.getByRole('heading', { name: /complete qr toolkit/i })).toBeVisible();
+    await expect(about.getByRole('listitem')).toHaveCount(jsonLd.featureList?.length ?? 0);
+    await expect(page.locator('header').getByText(/privacy first/i)).toHaveCount(0);
   });
 
   test('serves robots.txt, the social image and a real 404 page with a link to the studio', async ({

@@ -10,7 +10,7 @@ All notable changes to this project are documented here. The format follows
 
 - Search-engine and link-preview metadata generated at build time from `branding.seo`: title, meta description, Open Graph / Twitter Card tags, JSON-LD `WebApplication` data, `robots.txt` (disallowing `/api/` and `/r/`) and a 1200×630 social preview image (`public/og-image.png`, rendered by `npm run icons`).
 - Optional build-time variable `SITE_URL` that adds the canonical URL, `og:url`, absolute preview-image URLs and `sitemap.xml`.
-- Visible `<h1>` and one-line intro on the Studio view.
+- Visible `<h1>` and one-line intro on the Studio view, plus an "About" section below the editor describing the privacy model and the full toolset (also exposed as JSON-LD `featureList`/`keywords`).
 - API and dynamic-redirect responses send `X-Robots-Tag: noindex, nofollow`.
 
 ### Changed
