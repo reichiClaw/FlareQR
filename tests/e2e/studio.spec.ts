@@ -185,7 +185,10 @@ test.describe('FlareQR Studio', () => {
       page.getByRole('heading', { level: 1, name: /free, private qr code generator/i }),
     ).toBeVisible();
     const head = page.locator('head');
-    await expect(head.locator('meta[name="description"]')).toHaveAttribute('content', /QR codes/);
+    await expect(head.locator('meta[name="description"]')).toHaveAttribute(
+      'content',
+      /privacy-first qr code generator/i,
+    );
     await expect(head.locator('meta[property="og:title"]')).toHaveAttribute('content', /FlareQR Studio/);
     await expect(head.locator('meta[property="og:image"]')).toHaveAttribute('content', /og-image\.png$/);
     await expect(head.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
