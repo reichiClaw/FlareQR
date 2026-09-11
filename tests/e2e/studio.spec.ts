@@ -178,6 +178,45 @@ test.describe('FlareQR Studio', () => {
     expect(errors.map((e) => e.text())).toEqual([]);
   });
 
+  test('exposes search-engine metadata and a visible page heading', async ({ page }) => {
+    await openStudio(page);
+    await expect(page).toHaveTitle(/FlareQR Studio – Free, private QR code generator/);
+    await expect(
+      page.getByRole('heading', { level: 1, name: /free, private qr code generator/i }),
+    ).toBeVisible();
+    const head = page.locator('head');
+    await expect(head.locator('meta[name="description"]')).toHaveAttribute('content', /QR codes/);
+    await expect(head.locator('meta[property="og:title"]')).toHaveAttribute('content', /FlareQR Studio/);
+    await expect(head.locator('meta[property="og:image"]')).toHaveAttribute('content', /og-image\.png$/);
+    await expect(head.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    const jsonLd = await head.locator('script[type="application/ld+json"]').textContent();
+    expect(JSON.parse(jsonLd ?? '{}')).toMatchObject({ '@type': 'WebApplication', name: 'FlareQR Studio' });
+  });
+
+  test('serves robots.txt, the social image and a real 404 page with a link to the studio', async ({
+    page,
+    request,
+  }) => {
+    const robots = await request.get('/robots.txt');
+    expect(robots.ok()).toBe(true);
+    expect(await robots.text()).toMatch(/Disallow: \/api\/\s+Disallow: \/r\//);
+
+    const image = await request.get('/og-image.png');
+    expect(image.ok()).toBe(true);
+    expect((await image.body()).subarray(0, 8).equals(PNG_MAGIC)).toBe(true);
+
+    const missing = await request.get('/this/page/does-not-exist');
+    expect(missing.status()).toBe(404);
+    expect(missing.headers()['content-type']).toContain('text/html');
+
+    const response = await page.goto('/this/page/does-not-exist');
+    expect(response?.status()).toBe(404);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/doesn't exist/i);
+    await page.getByRole('link', { name: /open the qr code studio/i }).click();
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByRole('heading', { name: /what should the code contain/i })).toBeVisible();
+  });
+
   test('serves the API, manifest and OpenAPI document', async ({ request }) => {
     const health = await request.get('/api/health');
     expect(health.ok()).toBe(true);

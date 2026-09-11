@@ -240,7 +240,7 @@ npm run deploy         # = npm run build && wrangler deploy
 
 ### What gets deployed
 
-- `dist/client/*` as **Static Assets** with SPA fallback and a `_headers` file (CSP, caching).
+- `dist/client/*` as **Static Assets** with a `_headers` file (CSP, caching), `robots.txt` and a static `404.html` for unknown paths.
 - `dist/worker/index.js` as the Worker, which runs only for `/api/*` and `/r/*` (`run_worker_first`).
 - The resvg WebAssembly module (~1 MB compressed) and four subset Inter fonts (~0.35 MB compressed) – about 1.3 MB gzipped in total, well within the 3 MB free-plan limit.
 
@@ -375,6 +375,12 @@ Binding: `DB` (D1, auto-provisioned). Without it the studio and API still work, 
 
 Local overrides for development go in `.dev.vars` (git-ignored; see `.dev.vars.example`).
 
+**Build-time variable** (read by `npm run build`, not by the Worker):
+
+| Variable   | Default   | Description                                                                                                                                                                                                       |
+| ---------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SITE_URL` | _(unset)_ | Public origin of your deployment, e.g. `https://qr.example.com`. Enables the canonical URL, absolute social-preview URLs and `sitemap.xml`. See [Search engines & link previews](#search-engines--link-previews). |
+
 ## Security
 
 Highlights (details and reporting instructions in [SECURITY.md](SECURITY.md)):
@@ -383,6 +389,7 @@ Highlights (details and reporting instructions in [SECURITY.md](SECURITY.md)):
 - Strict Zod validation on every request; unknown fields rejected; body limit 1.6 MB; payload limit 4000 characters; output 128–4096 px.
 - Logos: MIME allowlist, magic-byte verification, 1 MB limit, allowlist-based SVG sanitizer. The Worker never fetches remote logos.
 - Strict CSP (`default-src 'self'`, no inline scripts/styles), `nosniff`, `no-referrer`, `Permissions-Policy`, `frame-ancestors 'none'`, immutable caching for fingerprinted assets, `no-store` for API responses.
+- Search engines are kept away from anything but the studio page: `robots.txt` disallows `/api/` and `/r/`, and API and redirect responses carry `X-Robots-Tag: noindex, nofollow`.
 - Dynamic-link destinations must be `http(s)` URLs; redirects carry `Referrer-Policy: no-referrer`; link management is admin-only unless you opt in to public access.
 - Dependencies audited with `npm audit` and kept current by Dependabot.
 
@@ -406,9 +413,20 @@ Tested with Chromium (desktop + mobile emulation) in CI. Uses standard APIs avai
 
 ## Customising
 
-- **Branding:** edit [`src/config/branding.ts`](src/config/branding.ts) (default name, repository URL, colours, tagline), replace `public/icons/icon.svg` and run `npm run icons`. The display name can also be changed at runtime in Admin → Settings.
+- **Branding:** edit [`src/config/branding.ts`](src/config/branding.ts) (default name, repository URL, colours, tagline, search-engine texts), replace `public/icons/icon.svg`, adjust the `OG` texts in `scripts/generate-icons.mjs` and run `npm run icons` (renders the PWA icons and the social preview image). The display name can also be changed at runtime in Admin → Settings.
 - **Adding a content type:** see [`docs/adding-a-content-type.md`](docs/adding-a-content-type.md).
 - **Adding a visual preset:** append to `BUILT_IN_PRESETS` in [`src/shared/style/presets.ts`](src/shared/style/presets.ts); every preset is round-trip decoded in the tests.
+
+### Search engines & link previews
+
+The studio is a single page, so search-engine optimisation is about describing it correctly rather than about content. The build (`scripts/seo.ts`, `seo` plugin in `vite.config.ts`) generates everything from `branding.seo`:
+
+- `<title>`, meta description, Open Graph and Twitter Card tags, and a JSON-LD `WebApplication` block in `index.html`; a visible `<h1>` heads the Studio view.
+- `public/og-image.png` (1200×630) as the social preview image, rendered by `npm run icons`.
+- `robots.txt` that allows the studio but disallows `/api/` and `/r/`; the Worker additionally sends `X-Robots-Tag: noindex, nofollow` on those routes.
+- A static `404.html` with a link back to the studio; unknown paths return a real HTTP 404 instead of a copy of the app, so crawlers never index stray URLs.
+
+Set the build-time variable `SITE_URL` to your public origin (for example `https://qr.example.com`) to additionally emit `<link rel="canonical">`, `og:url`, absolute image URLs and a `sitemap.xml`. With the Deploy button, add it under **Workers & Pages → flareqr → Settings → Variables and Secrets** as a build variable; locally, prefix the build (`SITE_URL=https://qr.example.com npm run build`) or put it in a git-ignored `.env` file. Without it everything still works – the URL-dependent tags are simply omitted. No analytics or third-party scripts are involved; verify ownership in Search Console via DNS if you need it.
 
 ## Updating dependencies
 

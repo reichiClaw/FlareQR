@@ -21,7 +21,9 @@
   "main": "src/worker/index.ts",
   "compatibility_date": "2026-09-03",
   "assets": {
-    "not_found_handling": "single-page-application",
+    // The app has no client-side routes, so unknown paths get a real 404 (dist/client/404.html,
+    // generated at build time) instead of a 200 copy of the studio that search engines would index.
+    "not_found_handling": "404-page",
     "run_worker_first": ["/api/*", "/r/*"],
     "binding": "ASSETS",
   },

@@ -27,6 +27,8 @@ export const BASE_SECURITY_HEADERS: Record<string, string> = {
   // API responses are data, never documents: forbid everything and sandbox.
   'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'; sandbox",
   'Cache-Control': 'no-store',
+  // API responses and dynamic redirect links must never appear in search results.
+  'X-Robots-Tag': 'noindex, nofollow',
 };
 
 export interface CorsContext {

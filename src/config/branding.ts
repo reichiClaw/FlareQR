@@ -27,6 +27,26 @@ export const branding = {
   logoPath: '/icons/icon.svg',
   /** Shown in the footer. */
   tagline: 'Generated locally in your browser. Nothing is uploaded.',
+  /**
+   * Search-engine and link-preview metadata. Injected into index.html at build
+   * time (see the `seo` plugin in vite.config.ts) and used for the Studio heading.
+   */
+  seo: {
+    /** Appended to the app name in the document title: "<name> – <titleTagline>". */
+    titleTagline: 'Free, private QR code generator',
+    /** Meta description / social preview text (aim for ≤ 160 characters). */
+    description:
+      'Create styled QR codes with logos and export SVG, PNG or JPG – free, in your browser, nothing uploaded. Batch CSV generation, dynamic links and an HTTP API.',
+    /** Visible <h1> of the Studio view. */
+    headline: 'Free, private QR code generator',
+    /** One-sentence intro shown next to the headline. */
+    intro:
+      'Design QR codes with logos and colours, check scan reliability and export SVG, PNG or JPG – generated locally in your browser.',
+    /** 1200×630 social preview image served from the assets directory (see scripts/generate-icons.mjs). */
+    imagePath: '/og-image.png',
+    /** Twitter/X card type. */
+    twitterCard: 'summary_large_image',
+  },
 } as const;
 
 export type Branding = typeof branding;

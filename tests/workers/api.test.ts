@@ -52,6 +52,7 @@ describe('GET /api/health', () => {
     expect(res.headers.get('Referrer-Policy')).toBe('no-referrer');
     expect(res.headers.get('Content-Security-Policy')).toContain("frame-ancestors 'none'");
     expect(res.headers.get('Permissions-Policy')).toBeTruthy();
+    expect(res.headers.get('X-Robots-Tag')).toBe('noindex, nofollow');
     expect(res.headers.get('Access-Control-Allow-Origin')).toBeNull();
   });
 });
