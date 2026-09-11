@@ -62,25 +62,32 @@ export const branding = {
     about: {
       privacy: {
         title: 'Privacy first',
-        text: 'Every QR code is generated locally in your browser: the content you enter is never uploaded, logged or tracked. No accounts, no analytics, no third-party scripts. Self-host it on your own Cloudflare account and stay in full control of your data.',
+        text: 'QR codes are generated locally in your browser – the content you enter is never uploaded, logged or tracked. No accounts, no analytics, no third-party scripts; self-host it on your own Cloudflare account.',
       },
-      toolkit: {
-        title: 'A complete QR toolkit',
-        text: 'Far more than a URL-to-QR converter – one open-source studio covers the whole workflow from design to automation.',
-      },
+      toolkit: { title: 'A complete QR toolkit' },
     },
-    /** Tools and capabilities, listed on the Studio view and in structured data. */
+    /**
+     * Tools and capabilities. `label` is shown as a compact chip on the Studio
+     * view (with `detail` as its tooltip); structured data lists both.
+     */
     features: [
-      '20 content types: URL, text, Wi-Fi, vCard, MeCard, email, phone, SMS, WhatsApp, events, location, SEPA, Bitcoin, Ethereum, 2FA and more',
-      'Module and finder styles, colours, gradients, frames and captions',
-      'Logo embedding that keeps codes scannable',
-      'Scan-reliability check with one-click safe defaults',
-      'SVG, PNG and JPG export, clipboard and data-URL copy',
-      'Batch generation from CSV with ZIP download',
-      'Editable dynamic links with scan statistics',
-      'Presets, undo/redo, local history and an offline-capable PWA',
-      'Documented HTTP API with OpenAPI 3.1 specification',
-      'Self-hosted on Cloudflare Workers, open source (MIT)',
+      {
+        label: '20 content types',
+        detail:
+          'URL, text, Wi-Fi, vCard, MeCard, email, phone, SMS, WhatsApp, events, location, SEPA, Bitcoin, Ethereum, 2FA and more',
+      },
+      {
+        label: 'Styles & gradients',
+        detail: 'Module and finder styles, colours, gradients, frames and captions',
+      },
+      { label: 'Logos', detail: 'Logo embedding that keeps codes scannable' },
+      { label: 'Scan-reliability check', detail: 'Warnings with one-click safe defaults' },
+      { label: 'SVG, PNG & JPG export', detail: 'Plus clipboard and data-URL copy' },
+      { label: 'Batch CSV → ZIP', detail: 'Batch generation from CSV with ZIP download' },
+      { label: 'Dynamic links', detail: 'Editable short links with scan statistics' },
+      { label: 'Presets & history', detail: 'Presets, undo/redo, local history and an offline-capable PWA' },
+      { label: 'HTTP API', detail: 'Documented HTTP API with OpenAPI 3.1 specification' },
+      { label: 'Open source', detail: 'Self-hosted on Cloudflare Workers, MIT licensed' },
     ],
     /** 1200×630 social preview image served from the assets directory (see scripts/generate-icons.mjs). */
     imagePath: '/og-image.png',
