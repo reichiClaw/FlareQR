@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Search-engine and link-preview metadata generated at build time from `branding.seo`: title, meta description, Open Graph / Twitter Card tags, JSON-LD `WebApplication` data, `robots.txt` (disallowing `/api/` and `/r/`) and a 1200×630 social preview image (`public/og-image.png`, rendered by `npm run icons`).
+- Optional build-time variable `SITE_URL` that adds the canonical URL, `og:url`, absolute preview-image URLs and `sitemap.xml`.
+- Visible `<h1>` and one-line intro on the Studio view.
+- API and dynamic-redirect responses send `X-Robots-Tag: noindex, nofollow`.
+
+### Changed
+
+- Unknown paths return a real HTTP 404 with a static page linking back to the studio (`not_found_handling: "404-page"`) instead of a 200 copy of the app.
+
 ## [1.1.0] – 2026-09-03
 
 ### Added

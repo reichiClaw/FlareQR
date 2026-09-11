@@ -1,8 +1,9 @@
 /**
  * FlareQR Studio – Cloudflare Worker entry point.
  *
- * Static assets are served by Cloudflare's asset pipeline (with SPA fallback);
- * this Worker only runs for /api/* and /r/* thanks to `run_worker_first`.
+ * Static assets are served by Cloudflare's asset pipeline (unknown paths get
+ * the static 404 page); this Worker only runs for /api/* and /r/* thanks to
+ * `run_worker_first`.
  * Every other request is forwarded to the ASSETS binding as a safety net.
  */
 import type { AppSettings } from '@shared/settings/schema';
@@ -77,7 +78,7 @@ async function route(request: Request, env: Env, url: URL, settings: AppSettings
     return handleRedirect(request, env, path.slice(3));
   }
 
-  // Not an API route – hand over to static assets (SPA fallback configured in wrangler.jsonc).
+  // Not an API route – hand over to static assets (404 page configured in wrangler.jsonc).
   return env.ASSETS.fetch(request);
 }
 

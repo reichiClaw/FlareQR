@@ -276,6 +276,7 @@ describe('dynamic links: built-in provider', () => {
     expect(redirect.status).toBe(302);
     expect(redirect.headers.get('Location')).toBe('https://example.com/spring');
     expect(redirect.headers.get('Referrer-Policy')).toBe('no-referrer');
+    expect(redirect.headers.get('X-Robots-Tag')).toBe('noindex, nofollow');
     await call(`/r/${link.code}`, { redirect: 'manual' });
 
     const details = await readJson<{ link: { scanCount: number }; scansByDay: Array<{ count: number }> }>(
