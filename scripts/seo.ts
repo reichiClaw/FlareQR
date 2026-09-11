@@ -59,7 +59,7 @@ function structuredData(siteUrl: string | null): string {
     browserRequirements: 'Requires JavaScript',
     isAccessibleForFree: true,
     keywords: seo.keywords.join(', '),
-    featureList: [...seo.features],
+    featureList: seo.features.map((feature) => `${feature.label}: ${feature.detail}`),
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     license: 'https://opensource.org/license/mit',
     sameAs: [branding.repositoryUrl],

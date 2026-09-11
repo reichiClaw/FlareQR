@@ -77,14 +77,14 @@ export function App() {
       <main id="main" className="mx-auto w-full max-w-[1600px] flex-1 px-3 py-4 sm:px-5" tabIndex={-1}>
         {view === 'studio' ? (
           <>
-            <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 px-1">
-              <h1 className="text-lg font-semibold tracking-tight">{branding.seo.headline}</h1>
-              <p className="text-sm text-muted">{branding.seo.intro}</p>
+            <div className="mb-2 flex items-baseline gap-x-2 px-1">
+              <h1 className="shrink-0 text-sm font-semibold tracking-tight">{branding.seo.headline}</h1>
+              <p className="min-w-0 truncate text-xs text-muted">{branding.seo.intro}</p>
             </div>
             {isDesktop ? (
               <div className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)_380px] xl:grid-cols-[400px_minmax(0,1fr)_420px]">
                 <aside
-                  className="panel max-h-[calc(100vh-9.5rem)] overflow-y-auto p-4 scroll-thin"
+                  className="panel max-h-[calc(100vh-8.75rem)] overflow-y-auto p-4 scroll-thin"
                   aria-label="Content"
                 >
                   <ContentPanel result={generation.result} />
@@ -102,7 +102,7 @@ export function App() {
                   </div>
                 </section>
                 <aside
-                  className="flex max-h-[calc(100vh-9.5rem)] flex-col gap-4 overflow-y-auto scroll-thin"
+                  className="flex max-h-[calc(100vh-8.75rem)] flex-col gap-4 overflow-y-auto scroll-thin"
                   aria-label="Design and export"
                 >
                   <div className="panel p-4">
@@ -179,7 +179,7 @@ export function App() {
                 </nav>
               </div>
             )}
-            <AboutSection className={cn('mt-6', !isDesktop && 'pb-24')} />
+            <AboutSection className={cn('mt-4', !isDesktop && 'mb-24')} />
           </>
         ) : null}
 
