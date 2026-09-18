@@ -37,7 +37,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.54.3",
+    "@cloudflare/vite-plugin": "^1.54.11",
     "@cloudflare/vitest-pool-workers": "^0.22.0",
     "@cloudflare/workers-types": "^5.20260903.1",
     "@eslint/js": "^10.0.1",
@@ -60,7 +60,7 @@
     "typescript-eslint": "^8.69.0",
     "vite": "^8.2.2",
     "vitest": "^4.1.11",
-    "wrangler": "^4.128.0",
+    "wrangler": "^4.133.0",
     "zxing-wasm": "^3.1.3"
   },
   "allowScripts": {
@@ -69,7 +69,7 @@
   },
   "overrides": {
     "@cloudflare/vitest-pool-workers": {
-      "miniflare": "5.20260831.0-alpha",
+      "miniflare": "5.20260916.0-alpha",
       "wrangler": "$wrangler"
     }
   }
