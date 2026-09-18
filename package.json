@@ -22,7 +22,8 @@
     "test:workers": "vitest run --project workers",
     "test:watch": "vitest --project unit",
     "test:browser": "playwright test",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build",
+    "check:deps": "node scripts/check-deps.mjs",
+    "check": "npm run check:deps && npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build",
     "deploy": "npm run build && wrangler deploy",
     "icons": "node scripts/generate-icons.mjs",
     "audit": "npm audit --omit=dev"
@@ -55,6 +56,7 @@
     "globals": "^17.12.0",
     "jsqr": "^1.4.0",
     "prettier": "^3.9.6",
+    "semver": "^7.8.5",
     "tailwindcss": "^4.3.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.69.0",

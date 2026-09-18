@@ -36,7 +36,7 @@ npm run dev
 ## Before opening a pull request
 
 ```bash
-npm run check          # typecheck + lint + format check + unit/worker tests + build
+npm run check          # dependency check + typecheck + lint + format check + unit/worker tests + build
 npm run test:browser   # Playwright (desktop + mobile)
 ```
 

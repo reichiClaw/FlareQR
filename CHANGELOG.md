@@ -12,8 +12,12 @@ All notable changes to this project are documented here. The format follows
 - Optional build-time variable `SITE_URL` that adds the canonical URL, `og:url`, absolute preview-image URLs and `sitemap.xml`.
 - Visually hidden `<h1>` on the Studio view and a footer tooltip (hover "Generated locally in your browser…") describing the privacy model and the full toolset (also exposed as JSON-LD `featureList`/`keywords`). The visible layout is unchanged.
 - API and dynamic-redirect responses send `X-Robots-Tag: noindex, nofollow`.
+- `npm run check:deps` (first step of `npm run check` and CI) fails when `vitest` or `typescript` leave the peer ranges of `@cloudflare/vitest-pool-workers` / `typescript-eslint`, or when the Miniflare override differs from the version Wrangler depends on – the causes of the ERESOLVE failures in Dependabot pull requests.
 
 ### Changed
+
+- Dependabot updates `vitest` together with the Cloudflare packages and no longer proposes major bumps of `vitest` and `@types/node`.
+- Wrangler 4.133.0, `@cloudflare/vite-plugin` 1.54.11 and Miniflare 5.20260916.0-alpha.
 
 - Unknown paths return a real HTTP 404 with a static page linking back to the studio (`not_found_handling: "404-page"`) instead of a 200 copy of the app.
 

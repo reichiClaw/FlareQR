@@ -214,7 +214,8 @@ Open http://localhost:5173. The Worker API (`/api/*`) and the local D1 database 
 | `npm run format`       | Prettier                                                                                           |
 | `npm test`             | Vitest: unit + round-trip tests (Node) and API/admin tests inside workerd with a real D1           |
 | `npm run test:browser` | Playwright: builds, serves through `wrangler dev` and runs desktop + mobile browser tests          |
-| `npm run check`        | typecheck + lint + format check + tests + production build                                         |
+| `npm run check:deps`   | Verifies that vitest/TypeScript stay inside their peer ranges and the Miniflare override matches   |
+| `npm run check`        | dependency check + typecheck + lint + format check + tests + production build                      |
 | `npm run deploy`       | Build and deploy with Wrangler                                                                     |
 | `npm run icons`        | Regenerate PNG icons from `public/icons/icon.svg`                                                  |
 
