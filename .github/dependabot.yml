@@ -7,10 +7,15 @@ updates:
       day: monday
     open-pull-requests-limit: 10
     groups:
+      # `@cloudflare/vitest-pool-workers` declares `peer vitest@^4.1.0` (and
+      # pins its own Miniflare/Wrangler through `overrides` in package.json), so
+      # vitest and the Cloudflare packages have to move together or `npm ci`
+      # fails with ERESOLVE. `npm run check:deps` verifies the result.
       cloudflare:
         patterns:
           - 'wrangler'
           - '@cloudflare/*'
+          - 'vitest'
       react:
         patterns:
           - 'react'
@@ -20,7 +25,6 @@ updates:
       tooling:
         patterns:
           - 'vite'
-          - 'vitest'
           - '@vitejs/*'
           - 'eslint*'
           - 'typescript-eslint'
@@ -34,6 +38,15 @@ updates:
       # `npm ci` (CI and Cloudflare Workers Builds) fail with ERESOLVE.
       # Drop this once typescript-eslint supports the new major.
       - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
+      # @cloudflare/vitest-pool-workers declares `peer vitest@^4.1.0`; a vitest
+      # major bump is only possible together with a pool-workers release that
+      # supports it. Drop this once such a release exists.
+      - dependency-name: 'vitest'
+        update-types: ['version-update:semver-major']
+      # @types/node tracks the Node.js major used in CI, Workers Builds and
+      # `engines.node`; bump it by hand together with the runtime.
+      - dependency-name: '@types/node'
         update-types: ['version-update:semver-major']
     labels:
       - dependencies
